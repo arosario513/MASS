@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>{{title}}</h1>
+    <div class="card m-auto">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                {{ form.date.label }}
+                {{ form.date(class="form-control mb-2") }}
+
+                {{ form.time.label }}
+                {{ form.time(class="form-control mb-2") }}
+
+                {{ form.doctor.label }}
+                {{ form.doctor(class="form-select mb-2") }}
+
+                {{ form.reason(class="form-control mb-3") }}
+                {{ form.submit(class="btn btn-primary w-100") }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

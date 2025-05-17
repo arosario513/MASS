@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container" style="max-width: 500px;">
+    <h1>{{title}}</h1>
+    <div class="card m-auto">
+        <div class="card-body">
+            <form method="POST" action="/forgot-password">
+                {{ form.hidden_tag() }}
+                {{ form.email(class="form-control mb-2") }}
+                {{ form.submit(class="btn btn-primary w-100") }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

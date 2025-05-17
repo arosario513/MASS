@@ -1,0 +1,22 @@
+{% extends "base.html" %} 
+{% block body %}
+<div class="container" style="max-width: 500px">
+    <h1>{{title}}</h1>
+    <div class="card m-auto">
+        <div class="card-body">
+            <form method="POST" action="/login">
+                {{ form.hidden_tag() }}
+                {{ form.email(class="form-control mb-2") }} 
+                {{ form.password(class="form-control mb-3") }}
+                {{ form.submit(class="btn btn-primary w-100") }}
+            </form>
+            <div class="text-end">
+                <a href="/forgot-password">Forgot Password</a>
+            </div>
+            <p class="text-center mt-2 mb-0">
+                Don't have an account? <a href="/register">Sign up!</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

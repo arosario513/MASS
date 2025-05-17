@@ -1,0 +1,6 @@
+.env
+.pylintrc
+__pycache__
+instance/
+certs/
+venv/

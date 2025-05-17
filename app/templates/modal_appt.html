@@ -1,0 +1,29 @@
+<div class="modal fade" id="cancelAppointment" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="POST" id="delete">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cancel Appointment</h5>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel this appointment? This action cannot
+                    be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    document.getElementById('cancelAppointment').addEventListener('show.bs.modal', event => {
+        const trigger = event.relatedTarget;
+        const uid = trigger.getAttribute('data-appt-id');
+        const form = document.getElementById('delete');
+        form.action = `/appointments/delete/${uid}`;
+    });
+</script>

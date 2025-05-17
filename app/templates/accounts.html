@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container m-auto">
+    <div class="row mb-2">
+        <div class="col">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="col text-end my-auto">
+            <a class="btn btn-primary mb-2" href="/admin/accounts/new">
+                <span class="bi bi-person-add"></span>
+                <span class="d-none d-sm-inline">New Account</span>
+            </a>
+        </div>
+    </div>
+
+    {% for user in users.items %}
+    <div class="card mb-3 m-auto">
+        <h5 class="card-header">{{user.fullname()}}</h5>
+        <div class="card-body">
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    <span class="fw-bold">ID: </span>
+                    {{user.id}}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Email: </span>
+                    {{user.email}}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Role: </span>
+                    {{user.get_roles() | join(", ")}}
+                </li>
+            </ul>
+            <div class="text-end">
+                <a class="btn btn-warning me-1" href={{url_for('admin.edit', uid=user.id)}} title="Edit">
+                    <span class="bi bi-pencil"></span>
+                </a>
+                <button class="btn btn-danger" type="button" title="Delete" data-bs-toggle="modal"
+                    data-bs-target="#confirm" data-user-id={{user.id}}>
+                    <span class="bi bi-trash"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<nav>
+    <ul class="pagination justify-content-center">
+        {% for page_num in users.iter_pages() %}
+        {% if users.page == page_num %}
+        <li class="page-item active">
+            <a class="page-link" href={{url_for("admin.accounts", page=page_num)}}>{{page_num}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href={{url_for("admin.accounts", page=page_num)}}>{{page_num}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+
+{% include "modal.html" %}
+
+{% endblock %}

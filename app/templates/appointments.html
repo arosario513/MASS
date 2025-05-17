@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <div class="row mb-2">
+        <div class="col">
+            <h1>{{ title }}</h1>
+        </div>
+        {% if current_user.has_role("Patient") %}
+        <div class="col text-end my-auto">
+            <a class="btn btn-primary" href="/appointments/new">
+                <span class="bi bi-calendar-plus"></span>
+                <span class="d-none d-sm-inline">New Appointment</span>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if appointments %}
+    {% for a in appointments %}
+    <div class="card mb-3 m-auto">
+        <h5 class="card-header">
+            {{a.date.strftime('%B %d, %Y')}}
+        </h5>
+        <div class="card-body">
+            <ul class="list-group mb-2">
+                <li class="list-group-item">
+                    <span class="fw-bold">Time: </span>
+                    {{a.time.strftime('%-I:%M%p')}}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Patient: </span>
+                    {{a.patient.fullname()}}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Doctor: </span>
+                    {{a.doctor.fullname()}}
+                </li>
+                <li class="list-group-item">
+                    <span class="fw-bold">Reason: </span>
+                    {{a.reason}}
+                </li>
+            </ul>
+            {% if current_user.has_role("Patient") or current_user.has_role("Admin") %}
+            <div class="text-end">
+
+                <button class="btn btn-danger" type="button" title="Cancel" data-bs-toggle="modal"
+                    data-bs-target="#cancelAppointment" data-appt-id={{a.id}}>
+                    <span class="bi bi-trash"></span>
+                </button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>No appointments found.</p>
+    {% endif %}
+</div>
+
+<nav>
+    <ul class="pagination justify-content-center">
+        {% for page_num in appointments.iter_pages() %}
+        {% if appointments.page == page_num %}
+        <li class="page-item active">
+            <a class="page-link" href={{url_for("appointments.view", page=page_num)}}>{{page_num}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href={{url_for("appointments.view", page=page_num)}}>{{page_num}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+{% include "modal_appt.html" %}
+{% endblock %}

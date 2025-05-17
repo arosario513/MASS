@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container" style="max-width:500px;">
+    <h1 class="mb-2">{{title}}</h1>
+    <div class="card m-auto">
+        <div class="card-body">
+            <form action={{url_for("admin.new")}} method="POST">
+                {{form.hidden_tag()}}
+                {{form.first_name(class="form-control mb-2")}}
+                {{form.last_name(class="form-control mb-2")}}
+                {{form.email(class="form-control mb-2")}}
+                {{form.verify_email(class="form-control mb-2")}}
+                {{form.password(class="form-control mb-2")}}
+                {{form.verify_password(class="form-control mb-2")}}
+                {{form.role(class="form-select mb-3")}}
+                {{form.submit(class="btn btn-primary w-100")}}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

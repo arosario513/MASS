@@ -1,4 +1,5 @@
-from flask import current_app
+from flask import current_app, url_for
+from flask_mail import Message
 from flask_login import UserMixin
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from sqlalchemy.orm import relationship
@@ -64,6 +65,36 @@ class User(UserMixin, db.Model):
 
     def fullname(self):
         return f"{self.first_name} {self.last_name}"
+
+    def request_password_reset(self):
+        token: str = self.get_reset_token()
+        url = url_for(
+            "auth.reset",
+            token=token,
+            _external=True
+        )
+        msg = Message("Password Reset", recipients=[self.email])
+        msg.body = f"""
+Hello {self.fullname()},
+
+To reset your password, click the following link:
+{url}
+
+If you didn't request for a password reset, ignore this message.
+        """
+        from app import mail
+        mail.send(msg)
+
+    def account_created(self):
+        msg = Message("Account Created", recipients=[self.email])
+        msg.body = f"""
+Hello {self.fullname()},
+
+This email is being sent to notify you that your MASS
+account was created successfully.
+        """
+        from app import mail
+        mail.send(msg)
 
     def __repr__(self):
         return f"User({self.id}, {self.first_name}, {self.last_name}, {self.email}, {self.get_roles()})"

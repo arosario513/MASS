@@ -100,7 +100,7 @@ def new():
 
         db.session.add(user)
         db.session.commit()
-
+        user.account_created()
         flash("New account added", "success")
         return redirect(url_for("admin.accounts"))
     return render_template("new_account.html", title="New Account", form=form)

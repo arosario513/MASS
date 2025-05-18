@@ -1,6 +1,5 @@
 #!venv/bin/python
 
-from flask_mail import Message
 from . import auth_blueprint
 from app.auth.forms import ForgotPassword, Register, Login, Reset
 from app.models import db
@@ -37,11 +36,12 @@ def register():
 
         db.session.add(user)
         db.session.commit()
-
         login_user(user)
         identity_changed.send(
             current_app._get_current_object(), identity=Identity(user.id)
         )
+        user.account_created()
+        flash(f"Welcome, {user.fullname()}", "success")
         return redirect(url_for("appointments.view"))
     return render_template("register.html", title="Register", form=form)
 
@@ -101,26 +101,10 @@ def forgot():
     form = ForgotPassword()
     if form.validate_on_submit():
         email = form.email.data
-        user = User.query.filter_by(email=email).first()
-        assert user is not None
-        token: str = user.get_reset_token()
-        url = url_for(
-            "auth.reset",
-            token=token,
-            _external=True
-        )
-        msg = Message("Password Reset", recipients=[user.email])
-        msg.body = f"""
-        Hello {user.fullname()},
-
-        To reset your password, click the following link:
-        {url}
-
-        If you didn't request for a password reset, ignore this message.
-        """
-        from app import mail
-        mail.send(msg)
-        flash("Request for password reset sent", "success")
+        user: User | None = User.query.filter_by(email=email).first()
+        if user:
+            user.request_password_reset()
+            flash("Request for password reset sent", "success")
         return redirect(url_for("auth.login"))
     return render_template("forgot.html", title="Forgot Password", form=form)
 

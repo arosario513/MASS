@@ -1,6 +1,7 @@
 .env
 .pylintrc
+.venv/
 __pycache__
-instance/
 certs/
-venv/
+instance/
+uv.lock

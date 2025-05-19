@@ -3,6 +3,7 @@
 > A full-stack medical scheduling web application built with [Flask](https://flask.palletsprojects.com/en/stable/), containerized with [Docker](https://www.docker.com/), and served via [Gunicorn](https://gunicorn.org/) and [Nginx](https://nginx.org/en/).
 
 ## Table of Contents
+
 - [Preview](#preview)
 - [About the Project](#about-the-project)
 - [Manual Setup](#manual-setup)
@@ -11,70 +12,40 @@
 - [Environment Variables](#environment-variables)
 
 ## Preview
+
 > For the previews I used horror movie characters as sample users.
 
 ### Home
+
 ![image](https://github.com/user-attachments/assets/a3d7ae71-91aa-4a65-a310-f9f66c68f8be)
+
 ### Admin Panel
+
 ![image](https://github.com/user-attachments/assets/0c4e1215-c33b-4574-8832-2e6f899a062d)
+
 ### Appointments (Admin)
+
 ![image](https://github.com/user-attachments/assets/5b9dc803-9996-4d64-b7f7-b4147099bd19)
+
 ### Appointments (Patient)
+
 ![image](https://github.com/user-attachments/assets/9c512f22-c7b5-4175-8831-cce08723da5a)
+
 ### New Appointment
+
 ![image](https://github.com/user-attachments/assets/42bb0c84-5b1b-4fea-9a8d-14bcf38eef79)
 
 ## About the Project
 
-MASS is my final project for **COMP-2052** and the most ambitious app I've developed so far. It enables users to register, log in, and schedule appointments, with roles for Admins, Doctors, and Patients.
+MASS was my final project for **COMP-2052** and the most ambitious app I've developed so far. It enables users to register, log in, and schedule appointments, with roles for Admins, Doctors, and Patients. Now I'm going to keep developing it as a full app.
 
 ## Manual Setup
 
-Before starting, clone the repository and run the setup script:
+>> Instead of the usual pip and venv setup, I'll use uv to take care of this.
 
-### macOS/Linux
+Make sure to have [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
 
-```bash
-curl https://raw.githubusercontent.com/arosario513/COMP-2052/refs/heads/main/work/final/setup.sh | sh
-```
-
-**OR**
-
-```bash
-wget https://raw.githubusercontent.com/arosario513/COMP-2052/refs/heads/main/work/final/setup.sh
-chmod +x setup.sh
-./setup.sh
-```
-
-Navigate into the `final/` directory and set up your Python environment:
-
-```bash
-cd final
-python -m venv venv
-source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-## Project Structure
-
-```
-final/
-├── app/
-│   ├── admin/
-│   ├── appointments/
-│   ├── auth/
-│   ├── models/
-│   ├── static/
-│   └── templates/
-├── docker-compose.yml
-├── Dockerfile
-├── gen-certs.sh
-├── main.py
-├── nginx/default.conf
-├── requirements.txt
-└── setup.sh
-```
+To-do: put setup steps here.
 
 ## Environment Variables
 

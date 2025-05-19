@@ -5,11 +5,11 @@
 ## Table of Contents
 
 - [Preview](#preview)
+- [File Structure](#file-structure)
 - [About the Project](#about-the-project)
+- [Environment Variables](#environment-variables)
 - [Manual Setup](#manual-setup)
 - [Docker Setup](#docker-setup)
-- [Project Structure](#project-structure)
-- [Environment Variables](#environment-variables)
 
 ## Preview
 
@@ -35,21 +35,32 @@
 
 ![image](https://github.com/user-attachments/assets/42bb0c84-5b1b-4fea-9a8d-14bcf38eef79)
 
+## File Structure
+```bash
+MASS
+├── app
+│   ├── admin/
+│   ├── appointments/
+│   ├── auth/
+│   ├── models/
+│   ├── static/
+│   └── templates/
+├── docker-compose.yml
+├── Dockerfile
+├── gen-certs.sh
+├── LICENSE
+├── main.py
+├── nginx/default.conf
+├── pyproject.toml
+└── README.md
+```
 ## About the Project
 
 MASS was my final project for **COMP-2052** and the most ambitious app I've developed so far. It enables users to register, log in, and schedule appointments, with roles for Admins, Doctors, and Patients. Now I'm going to keep developing it as a full app.
 
-## Manual Setup
-
->> Instead of the usual pip and venv setup, I'll use uv to take care of this.
-
-Make sure to have [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
-
-To-do: put setup steps here.
-
 ## Environment Variables
 
-Create a `.env` file in the project root with the following:
+After cloning the repo, `cd` into it. Then, create a `.env` file in the project root with the following:
 
 ```env
 SECRET_KEY='your_secret_key_here'
@@ -76,12 +87,31 @@ To generate a secure `SECRET_KEY`:
 python -c 'import secrets; print(secrets.token_hex(16))'
 ```
 
+## Manual Setup
+
+> Instead of the usual pip and venv setup, I'll use uv to take care of this.
+
+Make sure to have [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
+
+First, clone the repo and `cd` into it (if you haven't already):
+```bash
+git clone https://github.com/arosario513/MASS.git
+cd MASS
+```
+Then, create the virtual environment with:
+```bash
+uv venv
+```
+Finally, install the modules needed:
+```bash
+uv pip install .
+```
+
 ## Running the App (Manually)
 
-Once configured:
-
+Once configured, you can run it with:
 ```bash
-gunicorn -w 4 -b 0.0.0.0:5000 main:app
+uv run gunicorn -w 4 -b 0.0.0.0:5000 main:app
 ```
 
 You may change the port if needed.

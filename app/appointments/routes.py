@@ -74,6 +74,7 @@ def new():
         else:
             db.session.add(appointment)
             db.session.commit()
+            current_user.notify_appointment(appointment)
             flash("Appointment scheduled successfully", "success")
         return redirect(url_for("appointments.view"))
     return render_template("new_appointment.html", title="New Appointment", form=form)

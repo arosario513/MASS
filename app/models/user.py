@@ -3,6 +3,8 @@ from flask_mail import Message
 from flask_login import UserMixin
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from sqlalchemy.orm import relationship
+
+from app.models.appointment import Appointment
 from . import db
 from .role import Role, user_roles
 
@@ -95,6 +97,19 @@ account was created successfully.
         """
         from app import mail
         mail.send(msg)
+
+    def notify_appointment(self, appointment: Appointment):
+        dr: User | None = User.query.filter_by(id=appointment.dr_id).first()
+        if dr:
+            msg = Message("Appointment Confirmation", recipients=[self.email])
+            msg.body = f"""
+Hello {self.fullname()},
+
+This email is being sent to confirm that your appointment
+with Dr. {dr.fullname()} is on {appointment.date.strftime('%B %d, %Y')} at {appointment.time.strftime('%-I:%M%p')}.
+            """
+            from app import mail
+            mail.send(msg)
 
     def __repr__(self):
         return f"User({self.id}, {self.first_name}, {self.last_name}, {self.email}, {self.get_roles()})"

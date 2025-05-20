@@ -39,11 +39,6 @@ def create_app() -> Flask:
     pr.init_app(app)
     mail.init_app(app)
 
-    with app.app_context():
-        db.create_all()
-        db.add_roles(["Admin", "Patient", "Doctor"])
-        db.add_admin()
-
     @lm.user_loader
     def load_user(uid: int):
         return db.session.get(User, uid)

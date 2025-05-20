@@ -36,6 +36,7 @@
 ![image](https://github.com/user-attachments/assets/42bb0c84-5b1b-4fea-9a8d-14bcf38eef79)
 
 ## File Structure
+
 ```bash
 MASS
 ├── app
@@ -54,6 +55,7 @@ MASS
 ├── pyproject.toml
 └── README.md
 ```
+
 ## About the Project
 
 MASS was my final project for **COMP-2052** and the most ambitious app I've developed so far. It enables users to register, log in, and schedule appointments, with roles for Admins, Doctors, and Patients. Now I'm going to keep developing it as a full app.
@@ -94,27 +96,27 @@ python -c 'import secrets; print(secrets.token_hex(16))'
 Make sure to have [uv](https://docs.astral.sh/uv/getting-started/installation/) installed.
 
 First, clone the repo and `cd` into it (if you haven't already):
+
 ```bash
 git clone https://github.com/arosario513/MASS.git
 cd MASS
 ```
-Then, create the virtual environment with:
+
+Then make sure `start.sh` is executable
+
 ```bash
-uv venv
-```
-Finally, install the modules needed:
-```bash
-uv pip install .
+chmod +x start.sh
 ```
 
 ## Running the App (Manually)
 
-Once configured, you can run it with:
+Now you can run it with the bash script which will set up everything and start up the app:
+
 ```bash
-uv run gunicorn -w 4 -b 0.0.0.0:5000 main:app
+./start.sh
 ```
 
-You may change the port if needed.
+You may change the port and number of workers if needed inside `start.sh`.
 
 ## Docker Setup
 
@@ -146,9 +148,21 @@ subject=C=US, ST=PR, O=MASS, OU=MASS, CN=mass-server
 docker-compose up -d --build
 ```
 
-Then visit:
+after that, you can run it with:
+
+```bash
+docker-compose up -d
+```
+
+After running it, visit:
 
 - [https://127.0.0.1](https://127.0.0.1)
 - [https://mass.localhost](https://mass.localhost)
 
 **Note**: Browsers will warn you about the self-signed certs. For production, replace them with real certificates and update `nginx/default.conf` accordingly.
+
+5. To stop the app just run:
+
+```bash
+docker-compose down
+```

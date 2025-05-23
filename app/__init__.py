@@ -53,6 +53,7 @@ def create_app() -> Flask:
     app.register_blueprint(main_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(appointment_blueprint)
+    # ruff: noqa: F401
     from app import security
 
     return app

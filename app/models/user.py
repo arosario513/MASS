@@ -35,10 +35,7 @@ class User(UserMixin, db.Model):
             current_app.config["SECRET_KEY"]
         )
         try:
-            email = serial.loads(
-                token,
-                max_age=max_age
-            )
+            email = serial.loads(token, max_age=max_age)
         except SignatureExpired or BadSignature:
             return None
         return User.query.filter_by(email=email).first()
@@ -62,7 +59,7 @@ class User(UserMixin, db.Model):
             "first name": self.first_name,
             "last name": self.last_name,
             "email": self.email,
-            "roles": [i.name for i in self.roles]
+            "roles": [i.name for i in self.roles],
         }
 
     def fullname(self):
@@ -70,11 +67,7 @@ class User(UserMixin, db.Model):
 
     def request_password_reset(self):
         token: str = self.get_reset_token()
-        url = url_for(
-            "auth.reset",
-            token=token,
-            _external=True
-        )
+        url = url_for("auth.reset", token=token, _external=True)
         msg = Message("Password Reset", recipients=[self.email])
         msg.body = f"""
 Hello {self.fullname()},
@@ -85,6 +78,7 @@ To reset your password, click the following link:
 If you didn't request for a password reset, ignore this message.
         """
         from app import mail
+
         mail.send(msg)
 
     def account_created(self):
@@ -96,6 +90,7 @@ This email is being sent to notify you that your MASS
 account was created successfully.
         """
         from app import mail
+
         mail.send(msg)
 
     def notify_appointment(self, appointment: Appointment):
@@ -106,9 +101,10 @@ account was created successfully.
 Hello {self.fullname()},
 
 This email is being sent to confirm that your appointment
-with Dr. {dr.fullname()} is on {appointment.date.strftime('%B %d, %Y')} at {appointment.time.strftime('%-I:%M%p')}.
+with Dr. {dr.fullname()} is on {appointment.date.strftime("%B %d, %Y")} at {appointment.time.strftime("%-I:%M%p")}.
             """
             from app import mail
+
             mail.send(msg)
 
     def __repr__(self):

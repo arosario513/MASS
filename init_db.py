@@ -15,7 +15,9 @@ def main() -> None:
         db.create_all()
 
         if User.query.first():
-            print(f"[{YELLOW}*{RESET}] {YELLOW}Database already exists. Skipping...{RESET}")
+            print(
+                f"[{YELLOW}*{RESET}] {YELLOW}Database already exists. Skipping...{RESET}"
+            )
             exit(0)
 
         db.add_roles(["Admin", "Patient", "Doctor"])

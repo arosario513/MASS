@@ -27,10 +27,7 @@ def register():
         assert password is not None
         hash = ph.hash(password)
         user = User(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            password=hash
+            first_name=first_name, last_name=last_name, email=email, password=hash
         )
         user.add_role("Patient")
 
@@ -90,9 +87,7 @@ def login():
 def logout():
     logout_user()
     flash("Logged out", "warning")
-    identity_changed.send(
-        auth_blueprint, identity=AnonymousIdentity
-    )
+    identity_changed.send(auth_blueprint, identity=AnonymousIdentity)
     return redirect(url_for("auth.login"))
 
 

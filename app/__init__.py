@@ -31,7 +31,7 @@ def create_app() -> Flask:
         MAIL_USE_TLS=True,
         MAIL_USERNAME=getenv("MAIL_USERNAME"),
         MAIL_PASSWORD=getenv("MAIL_PASSWORD"),
-        MAIL_DEFAULT_SENDER=getenv("MAIL_DEFAULT_SENDER")
+        MAIL_DEFAULT_SENDER=getenv("MAIL_DEFAULT_SENDER"),
     )
 
     db.init_app(app)
@@ -46,9 +46,7 @@ def create_app() -> Flask:
     @app.errorhandler(HTTPException)
     def unauthorized(e):
         return render_template(
-            "error.html",
-            title=f"Error {e.code}",
-            err_msg=e.description
+            "error.html", title=f"Error {e.code}", err_msg=e.description
         ), e.code
 
     app.register_blueprint(auth_blueprint)
@@ -56,4 +54,5 @@ def create_app() -> Flask:
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(appointment_blueprint)
     from app import security
+
     return app

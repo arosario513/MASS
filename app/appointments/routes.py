@@ -20,30 +20,24 @@ def view():
     page = request.args.get("page", type=int)
     if admin_perm.can():
         appointments = Appointment.query.order_by(
-            Appointment.date,
-            Appointment.time
+            Appointment.date, Appointment.time
         ).paginate(page=page, per_page=2)
     elif dr_perm.can():
-        appointments = Appointment.query.filter_by(
-            dr_id=current_user.id
-        ).order_by(
-            Appointment.date,
-            Appointment.time
-        ).paginate(page=page, per_page=2)
+        appointments = (
+            Appointment.query.filter_by(dr_id=current_user.id)
+            .order_by(Appointment.date, Appointment.time)
+            .paginate(page=page, per_page=2)
+        )
     elif patient_perm.can():
-        appointments = Appointment.query.filter_by(
-            p_id=current_user.id
-        ).order_by(
-            Appointment.date,
-            Appointment.time
-        ).paginate(page=page, per_page=2)
+        appointments = (
+            Appointment.query.filter_by(p_id=current_user.id)
+            .order_by(Appointment.date, Appointment.time)
+            .paginate(page=page, per_page=2)
+        )
     else:
         appointments = []
     return render_template(
-        "appointments.html",
-        title="Appointments",
-        appointments=appointments,
-        page=page
+        "appointments.html", title="Appointments", appointments=appointments, page=page
     )
 
 
@@ -60,7 +54,7 @@ def new():
             time=form.time.data,
             p_id=current_user.id,
             dr_id=form.doctor.data,
-            reason=form.reason.data
+            reason=form.reason.data,
         )
 
         has_conflict = Appointment.query.filter_by(

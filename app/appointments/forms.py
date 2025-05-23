@@ -11,12 +11,10 @@ class NewAppointment(FlaskForm):
     reason = StringField(
         "Reason",
         widget=TextArea(),
-        validators=[
-            Length(max=64)
-        ],
+        validators=[Length(max=64)],
         render_kw={
             "placeholder": "Reason",
             "style": "resize: none; height: 100px;",
-        }
+        },
     )
     submit = SubmitField("Book Appointment")

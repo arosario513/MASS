@@ -33,9 +33,7 @@ def edit(uid: int):
         abort(404)
 
     form = Edit(
-        og_first_name=user.first_name,
-        og_last_name=user.last_name,
-        og_email=user.email
+        og_first_name=user.first_name, og_last_name=user.last_name, og_email=user.email
     )
 
     if form.validate_on_submit():
@@ -45,8 +43,7 @@ def edit(uid: int):
         selected_role = form.role.data
 
         role = db.session.execute(
-            db.select(Role)
-            .filter_by(name=selected_role)
+            db.select(Role).filter_by(name=selected_role)
         ).scalar_one_or_none()
 
         if role:
@@ -67,12 +64,7 @@ def edit(uid: int):
         if user.roles:
             form.role.data = user.roles[0].name
 
-    return render_template(
-        "edit.html",
-        title="Edit Account",
-        user=user,
-        form=form
-    )
+    return render_template("edit.html", title="Edit Account", user=user, form=form)
 
 
 @admin_blueprint.route("/accounts/new", methods=["GET", "POST"])
@@ -91,10 +83,7 @@ def new():
         hash = ph.hash(password)
 
         user = User(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            password=hash
+            first_name=first_name, last_name=last_name, email=email, password=hash
         )
         user.add_role(role)
 
@@ -110,7 +99,6 @@ def new():
 @login_required
 @admin_perm.require()
 def delete_user(uid: int):
-
     user = User.query.get_or_404(uid)
     if user.ap_as_patient or user.ap_as_doctor:
         flash("This user still has scheduled appointments.", "warning")

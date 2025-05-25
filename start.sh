@@ -14,10 +14,10 @@ usage() {
 Usage: $0 [options]
 
 Options:
-    -w, --workers WORKERS       Number of Gunicorn workers (default: $WORKERS)
-    -b, --bind IP_ADDRESS    Bind address (default: $BIND)
-    -p, --port PORT          Specify the port to run on (default: $PORT)
-    -h, --help               Show this help message
+    -w, --workers WORKERS   Number of Gunicorn workers (default: $WORKERS)
+    -b, --bind IP_ADDRESS   Bind address (default: $BIND)
+    -p, --port PORT         Specify the port to run on (default: $PORT)
+    -h, --help              Show this help message
 EOF
     exit 0
 }

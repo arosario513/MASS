@@ -37,7 +37,7 @@ class User(UserMixin, db.Model):
         )
         try:
             email = serial.loads(token, max_age=max_age)
-        except SignatureExpired or BadSignature:
+        except (SignatureExpired, BadSignature):
             return None
         return User.query.filter_by(email=email).first()
 

@@ -1,5 +1,3 @@
-#!venv/bin/python
-
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask import current_app, flash, redirect, render_template, url_for

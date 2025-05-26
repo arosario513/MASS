@@ -1,4 +1,4 @@
-#!venv/bin/python
+#!.venv/bin/python
 from flask import Flask
 from werkzeug.middleware.proxy_fix import ProxyFix
 

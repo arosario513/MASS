@@ -1,5 +1,3 @@
-#!venv/bin/python
-
 from argon2 import PasswordHasher
 from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required

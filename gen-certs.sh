@@ -8,12 +8,13 @@ DAYS_VALID=825
 
 mkdir -p "$CERT_DIR"
 
-green="\033[0;32m"
-red="\033[0;31m"
-reset="\033[0m"
+GREEN="\e[0;32m"
+RED="\e[0;31m"
+YELLOW="\e[0;33m"
+RESET="\e[0m"
 
 generate_root_ca() {
-    echo -e "${green}[+] Generating root CA...${reset}"
+    echo -e "[${GREEN}+${RESET}] ${GREEN}Generating root CA...${RESET}"
     openssl genrsa -out "$CA_KEY" 4096
     openssl req -x509 -new -nodes -key "$CA_KEY" -sha256 -days 3650 \
         -out "$CA_CERT" \
@@ -26,7 +27,7 @@ issue_cert() {
     local csr="$CERT_DIR/${name}.csr"
     local cert="$CERT_DIR/${name}.pem"
 
-    echo -e "${green}[+] Issuing cert for $name...${reset}"
+    echo -e "[${GREEN}+${RESET}] ${GREEN}Issuing cert for $name...${RESET}"
     openssl genrsa -out "$key" 2048
 
     openssl req -new -key "$key" -out "$csr" \
@@ -42,7 +43,7 @@ issue_cert() {
 if [ ! -f "$CA_CERT" ] || [ ! -f "$CA_KEY" ]; then
     generate_root_ca
 else
-    echo -e "${green}[+] Root CA already exists.${reset}"
+    echo -e "[${YELLOW}*${RESET}] ${YELLOW}Root CA already exists.${RESET}"
 fi
 
 issue_cert "mass-server"

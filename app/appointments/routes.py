@@ -1,12 +1,13 @@
-from flask import abort, redirect, render_template, flash, request, url_for
+from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user
 from flask_login.utils import login_required
 from flask_principal import Permission, RoleNeed
 
 from app.appointments.forms import NewAppointment
+from app.models import db
 from app.models.appointment import Appointment
 from app.models.user import User
-from app.models import db
+
 from . import appointment_blueprint
 
 patient_perm = Permission(RoleNeed("Patient"))

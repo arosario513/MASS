@@ -1,17 +1,18 @@
+from os import getenv
+
+from dotenv import load_dotenv
+from flask import Flask, render_template
+from flask_login import LoginManager
+from flask_mail import Mail
+from flask_principal import Principal
+from werkzeug.exceptions import HTTPException
+
 from app.admin.routes import admin_blueprint
 from app.appointments.routes import appointment_blueprint
 from app.auth.routes import auth_blueprint
 from app.models import db
 from app.models.user import User
 from app.routes import main as main_blueprint
-from dotenv import load_dotenv
-from flask import Flask, render_template
-from flask_login import LoginManager
-from flask_principal import Principal
-from flask_mail import Mail
-from os import getenv
-from werkzeug.exceptions import HTTPException
-
 
 load_dotenv()
 

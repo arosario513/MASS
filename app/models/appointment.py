@@ -1,4 +1,5 @@
 from sqlalchemy.orm import relationship
+
 from . import db
 
 

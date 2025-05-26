@@ -1,7 +1,4 @@
 from flask_wtf import FlaskForm
-from app.models import db
-from app.models.user import User
-from app.models.role import Role
 from wtforms import (
     EmailField,
     PasswordField,
@@ -11,6 +8,10 @@ from wtforms import (
     ValidationError,
 )
 from wtforms.validators import DataRequired, EqualTo, Length
+
+from app.models import db
+from app.models.role import Role
+from app.models.user import User
 
 
 class Edit(FlaskForm):

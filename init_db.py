@@ -1,8 +1,8 @@
+from flask import Flask
+
 from app import create_app
 from app.models import db
 from app.models.user import User
-from flask import Flask
-
 
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"

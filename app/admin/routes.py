@@ -1,14 +1,16 @@
 #!venv/bin/python
 
+from argon2 import PasswordHasher
+from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
-from . import admin_blueprint
+from flask_principal import Permission, RoleNeed
+
 from app.admin.forms import Edit, NewAccount
 from app.models import db
 from app.models.role import Role
 from app.models.user import User
-from argon2 import PasswordHasher
-from flask import abort, flash, redirect, render_template, request, url_for
-from flask_principal import Permission, RoleNeed
+
+from . import admin_blueprint
 
 ph: PasswordHasher = PasswordHasher()
 admin_perm = Permission(RoleNeed("Admin"))

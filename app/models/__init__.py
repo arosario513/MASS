@@ -1,8 +1,9 @@
-from flask_sqlalchemy import SQLAlchemy
+import logging
+from os import getenv
+
 from argon2 import PasswordHasher
 from dotenv import load_dotenv
-from os import getenv
-import logging
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 

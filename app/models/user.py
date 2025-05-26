@@ -1,10 +1,11 @@
 from flask import current_app, url_for
-from flask_mail import Message
 from flask_login import UserMixin
+from flask_mail import Message
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from sqlalchemy.orm import relationship
 
 from app.models.appointment import Appointment
+
 from . import db
 from .role import Role, user_roles
 

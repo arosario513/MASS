@@ -1,14 +1,16 @@
 #!venv/bin/python
 
-from . import auth_blueprint
-from app.auth.forms import ForgotPassword, Register, Login, Reset
-from app.models import db
-from app.models.user import User
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
-from flask import current_app, url_for, redirect, render_template, flash
-from flask_login import current_user, login_user, logout_user, login_required
-from flask_principal import Identity, identity_changed, AnonymousIdentity
+from flask import current_app, flash, redirect, render_template, url_for
+from flask_login import current_user, login_required, login_user, logout_user
+from flask_principal import AnonymousIdentity, Identity, identity_changed
+
+from app.auth.forms import ForgotPassword, Login, Register, Reset
+from app.models import db
+from app.models.user import User
+
+from . import auth_blueprint
 
 ph = PasswordHasher()
 

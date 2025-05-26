@@ -1,5 +1,5 @@
-from flask_principal import identity_loaded, RoleNeed
 from flask_login import current_user
+from flask_principal import RoleNeed, identity_loaded
 
 
 @identity_loaded.connect

@@ -4,9 +4,9 @@ from flask import current_app, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required, login_user, logout_user
 from flask_principal import AnonymousIdentity, Identity, identity_changed
 
-from app.auth.forms import ForgotPassword, Login, Register, Reset
-from app.models import db
-from app.models.user import User
+from mass.auth.forms import ForgotPassword, Login, Register, Reset
+from mass.models import db
+from mass.models.user import User
 
 from . import auth_blueprint
 

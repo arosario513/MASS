@@ -4,7 +4,7 @@ from flask_mail import Message
 from itsdangerous import BadSignature, SignatureExpired, URLSafeTimedSerializer
 from sqlalchemy.orm import relationship
 
-from app.models.appointment import Appointment
+from mass.models.appointment import Appointment
 
 from . import db
 from .role import Role, user_roles
@@ -78,7 +78,7 @@ To reset your password, click the following link:
 
 If you didn't request for a password reset, ignore this message.
         """
-        from app import mail
+        from mass import mail
 
         mail.send(msg)
 
@@ -90,7 +90,7 @@ Hello {self.fullname()},
 This email is being sent to notify you that your MASS
 account was created successfully.
         """
-        from app import mail
+        from mass import mail
 
         mail.send(msg)
 
@@ -104,7 +104,7 @@ Hello {self.fullname()},
 This email is being sent to confirm that your appointment
 with Dr. {dr.fullname()} is on {appointment.date.strftime("%B %d, %Y")} at {appointment.time.strftime("%-I:%M%p")}.
             """
-            from app import mail
+            from mass import mail
 
             mail.send(msg)
 

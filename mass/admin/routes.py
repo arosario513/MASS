@@ -3,10 +3,10 @@ from flask import abort, flash, redirect, render_template, request, url_for
 from flask_login import current_user, login_required
 from flask_principal import Permission, RoleNeed
 
-from app.admin.forms import Edit, NewAccount
-from app.models import db
-from app.models.role import Role
-from app.models.user import User
+from mass.admin.forms import Edit, NewAccount
+from mass.models import db
+from mass.models.role import Role
+from mass.models.user import User
 
 from . import admin_blueprint
 

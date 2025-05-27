@@ -1,9 +1,9 @@
 #!.venv/bin/python
 from flask import Flask
 
-from app import create_app
-from app.models import db
-from app.models.user import User
+from mass import create_app
+from mass.models import db
+from mass.models.user import User
 
 GREEN = "\033[0;32m"
 YELLOW = "\033[0;33m"

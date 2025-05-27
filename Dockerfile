@@ -1,5 +1,5 @@
 FROM python:3.13-slim
-WORKDIR /app
+WORKDIR /mass
 COPY . .
 ENV UV_LINK_MODE=copy
 RUN pip install --upgrade pip && pip install uv

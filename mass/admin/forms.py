@@ -9,9 +9,9 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, EqualTo, Length
 
-from app.models import db
-from app.models.role import Role
-from app.models.user import User
+from mass.models import db
+from mass.models.role import Role
+from mass.models.user import User
 
 
 class Edit(FlaskForm):

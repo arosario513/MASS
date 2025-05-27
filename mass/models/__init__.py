@@ -15,7 +15,7 @@ class Database(SQLAlchemy):
         super().__init__(*args, **kwargs)
 
     def add_roles(self, roles: list[str]):
-        from app.models.role import Role
+        from mass.models.role import Role
 
         for i in roles:
             if not self.session.execute(self.select(Role).filter_by(name=i)).first():
@@ -23,7 +23,7 @@ class Database(SQLAlchemy):
         self.session.commit()
 
     def add_admin(self):
-        from app.models.user import User
+        from mass.models.user import User
 
         first_name: str = getenv("ADMIN_FIRSTNAME") or "Default"
         last_name: str = getenv("ADMIN_LASTNAME") or "Admin"

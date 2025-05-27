@@ -7,12 +7,12 @@ from flask_mail import Mail
 from flask_principal import Principal
 from werkzeug.exceptions import HTTPException
 
-from app.admin.routes import admin_blueprint
-from app.appointments.routes import appointment_blueprint
-from app.auth.routes import auth_blueprint
-from app.models import db
-from app.models.user import User
-from app.routes import main as main_blueprint
+from mass.admin.routes import admin_blueprint
+from mass.appointments.routes import appointment_blueprint
+from mass.auth.routes import auth_blueprint
+from mass.models import db
+from mass.models.user import User
+from mass.routes import main as main_blueprint
 
 load_dotenv()
 
@@ -55,6 +55,6 @@ def create_app() -> Flask:
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(appointment_blueprint)
     # ruff: noqa: F401
-    from app import security
+    from mass import security
 
     return app

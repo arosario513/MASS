@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/mass
     restart: always
   nginx:
     image: nginx:stable
@@ -19,6 +19,6 @@ services:
       - web
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - .:/app
+      - .:/mass
       - ./nginx/certs:/etc/nginx/certs:ro
     restart: always

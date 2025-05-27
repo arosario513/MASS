@@ -3,10 +3,10 @@ from flask_login import current_user
 from flask_login.utils import login_required
 from flask_principal import Permission, RoleNeed
 
-from app.appointments.forms import NewAppointment
-from app.models import db
-from app.models.appointment import Appointment
-from app.models.user import User
+from mass.appointments.forms import NewAppointment
+from mass.models import db
+from mass.models.appointment import Appointment
+from mass.models.user import User
 
 from . import appointment_blueprint
 
